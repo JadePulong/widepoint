@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>School Management Portal</title>
+  <style>
+    :root {
+      --bg: #09121e;
+      --card: #121e2f;
+      --accent: #38bdf8;
+      --muted: #94a3b8;
+      --radius: 14px;
+      --shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #09121e 0%, #0c1a2a 60%);
+      color: #e2e8f0;
+      padding: 28px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      color: #012b20;
+      font-size: 20px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: linear-gradient(90deg, #06b6d4, #3b82f6);
+      border: none;
+      color: #012b20;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+    }
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .tool {
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      border-radius: 10px;
+    }
+    .tool h3 { margin-top: 0; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">SM</div>
+      <div>
+        <h1>School Management Portal</h1>
+        <p style="color:var(--muted);margin:0">Comprehensive tools for financial and administrative efficiency</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Administrator Tools</h2>
+      <p style="color:var(--muted)">This plan includes essential tools such as a school revenue calculator, payroll system, employee management, and student management — helping administrators monitor financial performance and streamline operations.</p>
+      <div class="tools">
+        <div class="tool">
+          <h3>💰 School Revenue Calculator</h3>
+          <p>Compute tuition revenue, expenses, and net income easily with this interactive calculator.</p>
+          <button class="btn" onclick="openRevenueCalc()">Open Calculator</button>
+        </div>
+        <div class="tool">
+          <h3>🧾 Payroll System</h3>
+          <p>Manage and disburse staff salaries automatically with accurate tax and deduction computations.</p>
+          <button class="btn" onclick="openPayroll()">Open Payroll</button>
+        </div>
+        <div class="tool">
+          <h3>👨‍🏫 Employee Management</h3>
+          <p>Track staff information, positions, and performance for efficient HR operations.</p>
+          <button class="btn ghost" onclick="openEmployee()">Manage Employees</button>
+        </div>
+        <div class="tool">
+          <h3>🎓 Student Management</h3>
+          <p>Maintain student profiles, monitor progress, and manage enrollment records all in one place.</p>
+          <button class="btn ghost" onclick="openStudent()">Manage Students</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 School Management Portal | Demo Version</p>
+  </footer>
+
+  <script>
+    function openRevenueCalc() {
+      const tuition = parseFloat(prompt('Enter total tuition collected:')) || 0;
+      const expenses = parseFloat(prompt('Enter total expenses:')) || 0;
+      const profit = tuition - expenses;
+      alert('Estimated Net Revenue: ₱' + profit.toLocaleString());
+    }
+    function openPayroll() {
+      const employees = parseInt(prompt('Number of employees to pay:'));
+      if(!employees) return;
+      const baseSalary = parseFloat(prompt('Average salary per employee:')) || 0;
+      const total = employees * baseSalary;
+      alert('Total payroll disbursement: ₱' + total.toLocaleString());
+    }
+    function openEmployee() {
+      alert('Employee management module coming soon (demo).');
+    }
+    function openStudent() {
+      alert('Student management system coming soon (demo).');
+    }
+  </script>
+</body>
+</html>

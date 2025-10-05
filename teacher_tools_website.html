@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teacher Tools Portal</title>
+  <style>
+    :root {
+      --bg: #0a1420;
+      --card: #121d2e;
+      --accent: #4ade80;
+      --muted: #94a3b8;
+      --radius: 14px;
+      --shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #0a1420 0%, #0b1725 60%);
+      color: #e2e8f0;
+      padding: 28px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      color: #012b20;
+      font-size: 20px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      border: none;
+      color: #012b20;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+    }
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .tool {
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      border-radius: 10px;
+    }
+    .tool h3 { margin-top: 0; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">TT</div>
+      <div>
+        <h1>Teacher Tools Portal</h1>
+        <p style="color:var(--muted);margin:0">Simplifying academic and administrative work for educators</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Available Tools</h2>
+      <p style="color:var(--muted)">Access tools designed to support faculty members by streamlining their workflow and minimizing errors.</p>
+      <div class="tools">
+        <div class="tool">
+          <h3>📦 Cloud Storage</h3>
+          <p>Upload, organize, and access academic files anytime, anywhere with secure encrypted storage.</p>
+          <button class="btn" onclick="openStorage()">Open Storage</button>
+        </div>
+        <div class="tool">
+          <h3>🧮 Class Record Calculator</h3>
+          <p>Automatically compute grades and generate downloadable reports to save time and reduce errors.</p>
+          <button class="btn" onclick="openCalculator()">Open Calculator</button>
+        </div>
+        <div class="tool">
+          <h3>🗂️ Report Generator</h3>
+          <p>Generate, export, and print grade reports and summaries in one click.</p>
+          <button class="btn ghost" onclick="generateReport()">Generate Report</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Teacher Tools Portal | Demo Version</p>
+  </footer>
+
+  <script>
+    function openStorage() {
+      alert('Opening secure cloud storage (demo only). In a full system, this would require login and encryption.');
+    }
+    function openCalculator() {
+      const students = prompt('Enter number of students (demo):');
+      if(!students) return;
+      let csv = 'Student ID,Name,Grade\n';
+      for(let i=1;i<=students;i++){
+        const id = '2025-00'+i;
+        const name = 'Student '+i;
+        const grade = Math.floor(Math.random()*41)+60;
+        csv += `${id},${name},${grade}\n`;
+      }
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'class-record-demo.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      alert('Class record CSV file downloaded (demo).');
+    }
+    function generateReport() {
+      alert('Report generation feature coming soon (demo).');
+    }
+  </script>
+</body>
+</html>

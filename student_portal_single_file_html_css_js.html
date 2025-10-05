@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Portal — Demo</title>
+  <meta name="description" content="Student portal demo: enrollment, registrar services, certificates, and schedule concerns." />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa6b2; --accent:#6ee7b7; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1100px;
+      --shadow: 0 6px 24px rgba(2,6,23,0.6);
+      font-synthesis: none;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071124 0%, #071426 60%); color:#e6eef6; -webkit-font-smoothing:antialiased;
+      padding:28px; display:flex; justify-content:center; align-items:start; gap:20px;
+    }
+    .wrap{width:100%; max-width:var(--maxw);}
+    header{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042024}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    nav button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 12px;border-radius:10px;cursor:pointer}
+    main{display:grid; grid-template-columns: 1fr 380px; gap:20px; align-items:start}
+
+    /* Left column */
+    .card{background:linear-gradient(180deg,var(--card), rgba(11,18,32,0.85));border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
+    .hero{display:flex;gap:18px;align-items:center}
+    .hero .icon{width:72px;height:72px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+    .feat{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;font-size:14px}
+
+    /* Documents */
+    .docs{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+    .doc{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .doc small{color:var(--muted)}
+    .btn{background:linear-gradient(90deg,#10b981,#06b6d4);border:none;padding:8px 12px;border-radius:10px;color:#032;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* Right column */
+    aside .card{position:sticky; top:28px}
+    form{display:flex;flex-direction:column;gap:10px}
+    label{font-size:13px;color:var(--muted)}
+    input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:inherit}
+    textarea{min-height:100px}
+    .small{font-size:12px;color:var(--muted)}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Responsive */
+    @media (max-width:900px){main{grid-template-columns:1fr} aside{order:2}}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center}
+    .modal{width:720px;max-width:92%;background:linear-gradient(180deg,#071226,#03111a);padding:18px;border-radius:12px}
+    .modal h3{margin-top:0}
+    .hidden{display:none}
+
+    /* tiny table */
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    td,th{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:left}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">SP</div>
+        <div>
+          <h1>Student Portal</h1>
+          <p class="lead">Convenient access to enrollment, registrar services, and document retrieval.</p>
+        </div>
+      </div>
+      <nav>
+        <button id="openEnroll">Enroll</button>
+        <button id="openConcern" class="ghost">Raise Concern</button>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <div class="card">
+          <div class="hero">
+            <div class="icon">🎓</div>
+            <div>
+              <h2 style="margin:0">Registrar & Student Services</h2>
+              <p class="small">Access Certificates of Enrollment, Official Grade Sheets, and manage student concerns about schedules.</p>
+            </div>
+          </div>
+
+          <div class="features">
+            <div class="feat"><strong>Online Enrollment</strong><div class="small">Submit and track enrollment requests.</div></div>
+            <div class="feat"><strong>Certificates</strong><div class="small">Request and download COE and other docs.</div></div>
+            <div class="feat"><strong>Grade Sheets</strong><div class="small">View official grades and semester history.</div></div>
+            <div class="feat"><strong>Schedule Support</strong><div class="small">Raise conflicts or ask for schedule changes.</div></div>
+          </div>
+
+          <div class="docs">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h3 style="margin:0">Quick documents</h3>
+              <small class="small">Mock samples</small>
+            </div>
+
+            <div class="doc">
+              <div>
+                <strong>Certificate of Enrollment (COE)</strong>
+                <div class="small">Issued: 2025-08-01</div>
+              </div>
+              <div>
+                <button class="btn" onclick="downloadDoc('coe')">Download</button>
+              </div>
+            </div>
+
+            <div class="doc">
+              <div>
+                <strong>Official Grade Sheet</strong>
+                <div class="small">Latest semester</div>
+              </div>
+              <div>
+                <button class="btn" onclick="downloadDoc('grades')">Download</button>
+              </div>
+            </div>
+
+            <div class="doc">
+              <div>
+                <strong>Enrollment Proof</strong>
+                <div class="small">For scholarship or work</div>
+              </div>
+              <div>
+                <button class="btn ghost" onclick="requestDoc('enrollment-proof')">Request</button>
+              </div>
+            </div>
+          </div>
+
+          <footer>
+            <div>Need help? Contact <a href="mailto:registrar@example.edu">registrar@example.edu</a></div>
+          </footer>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin-top:0">Raise a concern</h3>
+          <p class="small">If you have problems with your class schedule or documents, we will route your concern to the registrar.</p>
+
+          <form id="concernForm">
+            <label for="name">Full name</label>
+            <input id="name" required placeholder="Juan Dela Cruz" />
+
+            <label for="studentId">Student ID</label>
+            <input id="studentId" required placeholder="2025-00001" />
+
+            <label for="type">Concern type</label>
+            <select id="type">
+              <option>Schedule conflict</option>
+              <option>Document request</option>
+              <option>Grades query</option>
+              <option>Other</option>
+            </select>
+
+            <label for="details">Details</label>
+            <textarea id="details" placeholder="Describe the issue"></textarea>
+
+            <button type="submit" class="btn">Submit concern</button>
+          </form>
+
+          <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:12px 0" />
+          <h4 style="margin:0">Recent concerns</h4>
+          <table aria-label="recent concerns">
+            <thead><tr><th>Name</th><th>Type</th><th>Status</th></tr></thead>
+            <tbody id="concernList">
+              <tr><td>Maria Santos</td><td>Schedule conflict</td><td>Resolved</td></tr>
+              <tr><td>Mark Cruz</td><td>Document request</td><td>In review</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Modal: Enrollment -->
+  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal" role="document">
+      <h3>Enroll — Online Enrollment Form</h3>
+      <p class="small">Complete the required fields and click Submit. This demo does not connect to a real backend.</p>
+      <form id="enrollForm">
+        <label>Full name</label>
+        <input id="eName" required placeholder="Full name" />
+        <label>Student ID</label>
+        <input id="eId" required placeholder="2025-00001" />
+        <label>Program / Course</label>
+        <input id="eCourse" placeholder="Bachelor of Science in Computer Science" />
+        <label>Semester</label>
+        <select id="eSem"><option>1st Semester</option><option>2nd Semester</option></select>
+
+        <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+          <button type="button" class="btn ghost" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn">Submit enrollment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simple interactive behaviors for demo purposes only.
+    const modal = document.getElementById('modal');
+    document.getElementById('openEnroll').addEventListener('click', () => { modal.style.display='flex'; document.getElementById('eName').focus(); });
+    document.getElementById('openConcern').addEventListener('click', () => { document.getElementById('details').focus(); window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); });
+
+    function closeModal(){ modal.style.display='none'; }
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+    // Mock document download / request
+    function downloadDoc(id){
+      // produce a small data file and download
+      const text = (id==='grades')? 'Official Grade Sheet\n\nCOURSE: SAMPLE' : 'Certificate of Enrollment\n\nThis certifies that...';
+      const blob = new Blob([text], {type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = id+".txt"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+    function requestDoc(kind){
+      alert('Your request for "'+kind+'" has been submitted to the registrar. (Demo)');
+    }
+
+    // Enrollment form handling
+    document.getElementById('enrollForm').addEventListener('submit', (ev)=>{
+      ev.preventDefault();
+      const name = document.getElementById('eName').value.trim();
+      const id = document.getElementById('eId').value.trim();
+      if(!name||!id){ alert('Please fill name and student ID.'); return; }
+      closeModal();
+      alert('Enrollment submitted for '+name+" ("+id+"). This is a demo and does not connect to a live system.");
+    });
+
+    // Concern form handling — append to table
+    document.getElementById('concernForm').addEventListener('submit', (ev)=>{
+      ev.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const sid = document.getElementById('studentId').value.trim();
+      const type = document.getElementById('type').value;
+      const details = document.getElementById('details').value.trim();
+      if(!name||!sid){ alert('Name and Student ID are required.'); return; }
+      const tbody = document.getElementById('concernList');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${escapeHtml(name)}</td><td>${escapeHtml(type)}</td><td>Submitted</td>`;
+      tbody.prepend(tr);
+      document.getElementById('concernForm').reset();
+      alert('Your concern has been submitted. The registrar will follow up by email. (Demo)');
+    });
+
+    function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+  </script>
+</body>
+</html>
